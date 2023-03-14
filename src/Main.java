@@ -3,6 +3,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -34,13 +35,17 @@ public class Main {
         LoginTitle = driver.getTitle();
 
         //Step 3 Input Random Strings as credentials
+
+        //implicit wait
+        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         //Enter UserName
-        driver.findElement(By.className("newlogindialog_TextInput_2eKVn")).sendKeys("hELLOO");
 
+        driver.findElement(By.xpath("\\input[@type='text' AND @class='newlogindialog_TextInput_2eKVn']"))
+                .sendKeys("hELLOO");
         //Enter Password
-        driver.findElement(By.className("newlogindialog_FieldLabel_3d8dp")).sendKeys("PAASSWORD");
-
-        //Click on Log in
+        driver.findElement(By.xpath("\\input[@type='password' AND @class='newlogindialog_TextInput_2eKVn']"))
+                .sendKeys("hELLOO");
+            //Click on Log in
         driver.findElement(By.className("newlogindialog_SubmitButton_2QgFE")).click();
 
         //Loading element displayed if access was correct
@@ -58,7 +63,12 @@ public class Main {
     }
 
     public void AutoTest(){
+        TestCase testCase = new TestCase();
 
+        testCase.NavigateMainPage(WebPage);
+        testCase.LoginPage(LoginTitle);
+       // testCase.LoadingElementWait(LoadingStatus);
+       // testCase.Credential(LoginStatus);
 
     }
 

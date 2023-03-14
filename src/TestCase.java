@@ -9,8 +9,8 @@ public class TestCase {
     //Run Test Case in TestNG and using Asserts
     @Test
     //Main page is displayed
-    void NavigateMainPage(String Title){
-        Assert.assertEquals(Title,"https://store.steampowered.com/");
+    void NavigateMainPage(String WebPage){
+        Assert.assertEquals(WebPage,"https://store.steampowered.com/");
         System.out.println("This line is executed because assertEquals "
                 + "passed since both the strings are same");
     }
@@ -25,17 +25,19 @@ public class TestCase {
 
     @Test
     //Loading element is displayed
-    public void LoadingElement(boolean Status){
+    /*
+    public void LoadingElementWait(boolean Status){
         Assert.assertTrue(Status,true);
         System.out.println("This line will be executed if the element appear");
     }
 
     @Test
     //Error text in login credentials is displayed
-    public void LoadingElement(boolean LoginStatus){
+    public void Credential(boolean LoginStatus){
         Assert.assertTrue(LoginStatus,true);
         System.out.println("This line will be executed if there are wrong credentials");
     }
+*/
 
     public static String getWebPage() {
         return WebPage;
