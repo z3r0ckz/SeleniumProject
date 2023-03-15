@@ -2,8 +2,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import java.time.Duration;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -14,9 +14,12 @@ public class Main {
     static boolean LoginStatus;
 
     public static void main(String[] args) {
+
         //Setup Language EN
         ChromeOptions options = new ChromeOptions();
         options.addArguments("lang=en-GB");
+        //To fix problems with the versions
+        options.addArguments("--remote-allow-origins=*");
 
         //1 Step  ---- Open the Chrome Browser
         System.setProperty("webdriver.chrome.driver","JarFiles/chromedriver.exe");
@@ -37,14 +40,14 @@ public class Main {
         //Step 3 Input Random Strings as credentials
 
         //implicit wait
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-        //Enter UserName
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
-        driver.findElement(By.xpath("\\input[@type='text' AND @class='newlogindialog_TextInput_2eKVn']"))
+        //Enter UserName
+        driver.findElement(By.xpath("(//input[@type='text' AND @class='newlogindialog_TextInput_2eKVn']"))
                 .sendKeys("hELLOO");
         //Enter Password
-        driver.findElement(By.xpath("\\input[@type='password' AND @class='newlogindialog_TextInput_2eKVn']"))
-                .sendKeys("hELLOO");
+        driver.findElement(By.xpath("//input[@type='password' AND @class='newlogindialog_TextInput_2eKVn']"))
+                .sendKeys("pasasas");
             //Click on Log in
         driver.findElement(By.className("newlogindialog_SubmitButton_2QgFE")).click();
 
@@ -57,18 +60,22 @@ public class Main {
         NoAccess = (driver.findElement(By.className("newlogindialog_FormError_1Mcy9")).getText());
         LoginStatus = Objects.equals(NoAccess, "Please check your password and account name and try again");
 
+        //Run AutoTest
+        AutoTest();
+
         //Close the browser
         driver.close();
 
+
     }
 
-    public void AutoTest(){
+    public static void AutoTest(){
         TestCase testCase = new TestCase();
 
         testCase.NavigateMainPage(WebPage);
         testCase.LoginPage(LoginTitle);
-       // testCase.LoadingElementWait(LoadingStatus);
-       // testCase.Credential(LoginStatus);
+        testCase.LoadingElementWait(LoadingStatus);
+        testCase.Credential(LoginStatus);
 
     }
 
