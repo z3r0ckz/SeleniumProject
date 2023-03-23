@@ -9,7 +9,7 @@ public class TestCase {
     //Run Test Case in TestNG and using Asserts
 
     @Test
-    //Main page is displayed
+    //Main page is displayed on webpage
     void NavigateMainPage(String WebPage){
         Assert.assertEquals(WebPage,"https://store.steampowered.com/");
         System.out.println("This line is executed because WebPage "
